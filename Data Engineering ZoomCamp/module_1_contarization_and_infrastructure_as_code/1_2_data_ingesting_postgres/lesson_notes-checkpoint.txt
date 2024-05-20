@@ -1,0 +1,29 @@
+# 1. pull Postgres image with the below configuration
+Windows WSL (volume path is different)
+
+    docker run -it \
+        -e POSTGRES_USER='root' \ # -e describes Environment variables 
+        -e POSTGRES_PASSWORD='root' \
+        -e POSTGRES_DB="ny_taxi" \ # dataset name is good name for the DB name
+        -v c/home/vlad/dev/Data Engineering ZoomCamp/Module 1 - Containerization Infrastructure as Code/Data Ingesting with Postgres/pg_db_volume:/var/lib/postgresql/data \ # mountaing the volume to a container
+        -p 5432:5432 \  # port mappingcd 
+        postgres:13
+
+Linux
+    docker run -it \
+        -e POSTGRES_USER='root' \
+        -e POSTGRES_PASSWORD='root' \
+        -e POSTGRES_DB="ny_taxi" \ # dataset name is good name for the DB name
+        -v $(pwd)/pg_db_volume:/var/lib/postgresql/data \ # mountaing the volume to a container
+        -p 5432:5432 \  # port mapping
+        postgres:13
+
+docker run -it \
+    -e POSTGRES_USER='root' \
+    -e POSTGRES_PASSWORD='root' \
+    -e POSTGRES_DB='ny_taxi' \ 
+    -v $(pwd)/pg_db_volume:/var/lib/postgresql/data \ 
+    -p 5432:5432 \  
+    postgres:13
+
+docker run -it -e POSTGRES_USER='root' -e POSTGRES_PASSWORD='root' -e POSTGRES_DB='ny_taxi' -v $(pwd)/pg_db_volume:/var/lib/postgresql/data -p 5432:5432 postgres:13
